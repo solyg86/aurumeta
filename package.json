@@ -14,11 +14,11 @@
     "aurumeta",
     "static-site"
   ],
-  "author": "Your Name",
+  "author": "M.Auruelisu",
   "license": "MIT",
   "homepage": ".",
   "repository": {
     "type": "git",
-    "url": "https://solyg86.github.io/aurumeta/ "
+    "url": "https://solyg86.github.io/aurumeta/"
   }
 }
