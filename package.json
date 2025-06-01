@@ -1,0 +1,285 @@
+{
+  "name": "aurumeta-world",
+  "version": "1.0.0",
+  "description": "Aurumeta.World - PopStoic Real Estate Investment Platform. Transform real estate into liquid, accessible digital assets through blockchain tokenization.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve . -l 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'Static site - no build required'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'Linting HTML, CSS, JS files'",
+    "validate": "html-validate *.html",
+    "optimize": "imagemin assets/images/* --out-dir=assets/images/optimized",
+    "deploy": "netlify deploy --prod --dir .",
+    "preview": "netlify deploy --dir .",
+    "lighthouse": "lighthouse http://localhost:8000 --output html --output-path lighthouse-report.html",
+    "accessibility": "pa11y http://localhost:8000",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "robots": "node scripts/generate-robots.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurumeta-world/website.git"
+  },
+  "keywords": [
+    "real-estate",
+    "tokenization",
+    "blockchain",
+    "web3",
+    "rwa",
+    "defi",
+    "dao",
+    "stoicism",
+    "pop-art",
+    "popstoicism",
+    "investment",
+    "property",
+    "ethereum",
+    "polygon",
+    "fractional-ownership",
+    "liquid-assets",
+    "transparent-governance",
+    "community-driven",
+    "virtue-ethics",
+    "sustainable-investment"
+  ],
+  "author": {
+    "name": "Aurumeta.World Team",
+    "email": "hello@aurumeta.world",
+    "url": "https://aurumeta.world"
+  },
+  "contributors": [
+    {
+      "name": "PopStoic Founding Team",
+      "email": "team@aurumeta.world",
+      "role": "Philosophy & Development"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aurumeta-world/website/issues",
+    "email": "support@aurumeta.world"
+  },
+  "homepage": "https://aurumeta.world",
+  "funding": {
+    "type": "individual",
+    "url": "https://aurumeta.world/contact"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "devDependencies": {
+    "@netlify/cli": "^17.0.0",
+    "html-validate": "^8.0.0",
+    "lighthouse": "^11.0.0",
+    "pa11y": "^7.0.0",
+    "serve": "^14.0.0",
+    "imagemin": "^8.0.0",
+    "imagemin-webp": "^8.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "config": {
+    "port": 8000,
+    "host": "localhost"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.html",
+    "whitepaper.html",
+    "roadmap.html",
+    "privacy.html",
+    "contact.html",
+    "assets/",
+    "netlify.toml",
+    "README.md"
+  ],
+  "directories": {
+    "doc": "./docs",
+    "test": "./tests"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "preferGlobal": false,
+  "meta": {
+    "philosophy": "PopStoicism",
+    "mission": "Democratizing real estate investment through blockchain technology",
+    "vision": "Creating a transparent, accessible, and virtue-driven investment platform",
+    "values": [
+      "Transparency",
+      "Accessibility", 
+      "Virtue",
+      "Community",
+      "Sustainability"
+    ],
+    "technology": {
+      "frontend": "Vanilla HTML/CSS/JS",
+      "blockchain": "Ethereum & Polygon",
+      "deployment": "Netlify",
+      "philosophy": "Progressive Enhancement"
+    },
+    "community": {
+      "discord": "https://discord.gg/aurumeta",
+      "twitter": "https://twitter.com/AurumetaWorld",
+      "telegram": "https://t.me/AurumetaWorld"
+    }
+  },
+  "netlify": {
+    "functions": "./netlify/functions",
+    "edge-handlers": "./netlify/edge-handlers",
+    "build": {
+      "publish": ".",
+      "command": "echo 'Static site deployment'",
+      "environment": {
+        "NODE_VERSION": "18",
+        "RUBY_VERSION": "3.0"
+      }
+    }
+  },
+  "lighthouse": {
+    "ci": {
+      "collect": {
+        "url": [
+          "http://localhost:8000/",
+          "http://localhost:8000/whitepaper.html",
+          "http://localhost:8000/roadmap.html",
+          "http://localhost:8000/privacy.html",
+          "http://localhost:8000/contact.html"
+        ],
+        "numberOfRuns": 3
+      },
+      "assert": {
+        "assertions": {
+          "categories:performance": ["warn", {"minScore": 0.9}],
+          "categories:accessibility": ["error", {"minScore": 0.95}],
+          "categories:best-practices": ["warn", {"minScore": 0.9}],
+          "categories:seo": ["error", {"minScore": 0.95}],
+          "categories:pwa": ["warn", {"minScore": 0.8}]
+        }
+      }
+    }
+  },
+  "stylelint": {
+    "rules": {
+      "color-no-invalid-hex": true,
+      "font-family-no-duplicate-names": true,
+      "function-calc-no-unspaced-operator": true,
+      "unit-no-unknown": true,
+      "property-no-unknown": true,
+      "declaration-block-no-duplicate-properties": true,
+      "selector-pseudo-class-no-unknown": true,
+      "selector-pseudo-element-no-unknown": true,
+      "no-duplicate-selectors": true
+    }
+  },
+  "htmlvalidate": {
+    "extends": ["html-validate:recommended"],
+    "rules": {
+      "require-sri": "off",
+      "no-inline-style": "off"
+    }
+  },
+  "pa11y": {
+    "standard": "WCAG2AAA",
+    "ignore": [
+      "notice",
+      "warning"
+    ],
+    "hideElements": ".skip-link"
+  },
+  "imagemin": {
+    "glob": "assets/images/**/*.{jpg,jpeg,png,gif,svg}",
+    "destination": "assets/images/optimized/",
+    "options": {
+      "mozjpeg": {
+        "quality": 85
+      },
+      "pngquant": {
+        "quality": [0.65, 0.8]
+      }
+    }
+  },
+  "seo": {
+    "sitemap": {
+      "hostname": "https://aurumeta.world",
+      "urls": [
+        "/",
+        "/whitepaper.html",
+        "/roadmap.html", 
+        "/privacy.html",
+        "/contact.html"
+      ]
+    },
+    "robots": {
+      "userAgent": "*",
+      "allow": "/",
+      "disallow": [
+        "/admin",
+        "/private",
+        "/*.pdf$"
+      ],
+      "sitemap": "https://aurumeta.world/sitemap.xml"
+    }
+  },
+  "security": {
+    "headers": {
+      "contentSecurityPolicy": "default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdnjs.cloudflare.com;",
+      "xFrameOptions": "DENY",
+      "xXSSProtection": "1; mode=block",
+      "xContentTypeOptions": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin"
+    }
+  },
+  "performance": {
+    "budget": {
+      "images": "500kb",
+      "scripts": "150kb",
+      "styles": "100kb",
+      "fonts": "200kb",
+      "total": "1mb"
+    },
+    "metrics": {
+      "firstContentfulPaint": "<2s",
+      "largestContentfulPaint": "<2.5s",
+      "cumulativeLayoutShift": "<0.1",
+      "firstInputDelay": "<100ms"
+    }
+  },
+  "compatibility": {
+    "browsers": {
+      "chrome": ">=80",
+      "firefox": ">=75", 
+      "safari": ">=13",
+      "edge": ">=80"
+    },
+    "features": [
+      "css-grid",
+      "css-flexbox",
+      "css-custom-properties",
+      "intersection-observer",
+      "web-storage",
+      "fetch"
+    ]
+  }
+}

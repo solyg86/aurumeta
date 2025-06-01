@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Aurumeta.World</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #6B46C1;
+            --deep-purple: #4C1D95;
+            --gold: #F59E0B;
+            --vibrant-blue: #2563EB;
+            --magenta: #EC4899;
+            --dark-bg: #1F1B24;
+            --light-text: #F8FAFC;
+            --accent-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--light-text);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--deep-purple) 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(31, 27, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--primary-purple) 50%, var(--dark-bg) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), var(--magenta), var(--vibrant-blue));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(75, 29, 149, 0.05);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .subsection-title {
+            font-size: 1.4rem;
+            color: var(--magenta);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.15), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .privacy-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .privacy-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .privacy-item h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .privacy-item i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .data-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .data-list li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .data-list li::before {
+            content: '•';
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-info h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .gdpr-notice {
+            background: linear-gradient(45deg, var(--vibrant-blue), var(--primary-purple));
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .gdpr-notice h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .right-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .footer {
+            background: var(--dark-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-bg);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid rgba(107, 70, 193, 0.3);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            .privacy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">Aurumeta.World</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="whitepaper.html">Whitepaper</a></li>
+                <li><a href="roadmap.html">Roadmap</a></li>
+                <li><a href="privacy.html" class="active">Privacy</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p class="hero-subtitle">
+                Your privacy is fundamental to our PopStoic philosophy. We believe in transparency, respect, and ethical data practices that align with our community values.
+            </p>
+            <div class="last-updated">Last Updated: January 2025</div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Commitment to Privacy</h2>
+            <div class="section-content">
+                <p>At Aurumeta.World, we operate under the PopStoic principle that true strength comes from virtue and transparency. This Privacy Policy reflects our commitment to protecting your personal information while building a revolutionary real estate investment platform.</p>
+                
+                <div class="highlight-box">
+                    <strong>PopStoic Privacy Principle:</strong> We collect only what we need, protect what we collect, and respect your rights at every step. Your trust is the foundation of our community.
+                </div>
+
+                <p>This policy applies to all users of Aurumeta.World, including our website, mobile applications, and all related services. By using our platform, you agree to the practices described in this policy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information We Collect -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Information We Collect</h2>
+            <div class="section-content">
+                <p>We collect information that enables us to provide secure, compliant, and personalized real estate investment services.</p>
+
+                <div class="privacy-grid">
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-user"></i>Personal Information</h4>
+                        <ul class="data-list">
+                            <li>Full name and date of birth</li>
+                            <li>Email address and phone number</li>
+                            <li>Residential address</li>
+                            <li>Government-issued ID (KYC compliance)</li>
+                            <li>Financial information for verification</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-chart-line"></i>Investment Data</h4>
+                        <ul class="data-list">
+                            <li>Portfolio holdings and transactions</li>
+                            <li>Investment preferences and risk profile</li>
+                            <li>Property interests and voting history</li>
+                            <li>DAO participation and governance activities</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-desktop"></i>Technical Information</h4>
+                        <ul class="data-list">
+                            <li>IP address and device information</li>
+                            <li>Browser type and version</li>
+                            <li>Usage patterns and platform interactions</li>
+                            <li>Wallet addresses and blockchain transactions</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-comments"></i>Communication Data</h4>
+                        <ul class="data-list">
+                            <li>Support inquiries and correspondence</li>
+                            <li>Community forum posts and comments</li>
+                            <li>Feedback and survey responses</li>
+                            <li>Marketing communication preferences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Use Information -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">How We Use Your Information</h2>
+            <div class="section-content">
+                <h3 class="subsection-title">Primary Uses</h3>
+                <ul class="data-list">
+                    <li><strong>Platform Services:</strong> Process investments, manage portfolios, and facilitate property ownership</li>
+                    <li><strong>Compliance:</strong> Meet KYC/AML requirements and regulatory obligations</li>
+                    <li><strong>Security:</strong> Protect against fraud, unauthorized access, and maintain platform integrity</li>
+                    <li><strong>Governance:</strong> Enable DAO participation and community decision-making</li>
+                    <li><strong>Communication:</strong> Send important updates, notifications, and requested information</li>
+                </ul>
+
+                <h3 class="subsection-title">Secondary Uses (With Your Consent)</h3>
+                <ul class="data-list">
+                    <li><strong>Personalization:</strong> Customize investment recommendations and user experience</li>
+                    <li><strong>Analytics:</strong> Improve platform performance and develop new features</li>
+                    <li><strong>Marketing:</strong> Share relevant opportunities and community updates</li>
+                    <li><strong>Research:</strong> Conduct studies to improve real estate tokenization</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>PopStoic Commitment:</strong> We never sell your personal data to third parties. Your information is used solely to serve you and our community better.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Sharing -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Data Sharing & Disclosure</h2>
+            <div class="section-content">
+                <p>We share your information only when necessary and with appropriate protections:</p>
+
+                <h3 class="subsection-title">Service Providers</h3>
+                <p>We work with trusted partners who help us operate our platform:</p>
+                <ul class="data-list">
+                    <li><strong>KYC/AML Providers:</strong> Identity verification and compliance screening</li>
+                    <li><strong>Payment Processors:</strong> Secure transaction processing</li>
+                    <li><strong>Cloud Services:</strong> Data storage and platform hosting</li>
+                    <li><strong>Analytics Partners:</strong> Platform performance and user experience improvement</li>
+                </ul>
+
+                <h3 class="subsection-title">Legal Requirements</h3>
+                <p>We may disclose information when required by law or to:</p>
+                <ul class="data-list">
+                    <li>Comply with legal processes or government requests</li>
+                    <li>Protect the rights, property, or safety of our users</li>
+                    <li>Investigate potential violations of our terms</li>
+                    <li>Respond to verified requests from law enforcement</li>
+                </ul>
+
+                <h3 class="subsection-title">Business Transfers</h3>
+                <p>In the event of a merger, acquisition, or sale of assets, user information may be transferred as part of the transaction, with continued protection under this policy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Security -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Data Security & Protection</h2>
+            <div class="section-content">
+                <p>We implement industry-leading security measures to protect your information:</p>
+
+                <div class="privacy-grid">
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-shield-alt"></i>Encryption</h4>
+                        <p>All data is encrypted in transit and at rest using AES-256 encryption standards.</p>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-key"></i>Access Control</h4>
+                        <p>Multi-factor authentication and role-based access to limit data exposure.</p>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-server"></i>Infrastructure</h4>
+                        <p>Secure cloud infrastructure with regular security audits and monitoring.</p>
+                    </div>
+
+                    <div class="privacy-item">
+                        <h4><i class="fas fa-user-shield"></i>Staff Training</h4>
+                        <p>Regular privacy and security training for all team members.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Blockchain Security:</strong> Property ownership records are secured on the blockchain, providing immutable and transparent ownership verification while maintaining privacy through pseudonymous addresses.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your Rights (GDPR) -->
+    <section class="section">
+        <div class="container">
+            <div class="gdpr-notice">
+                <h4><i class="fas fa-balance-scale"></i> Your Privacy Rights</h4>
+                <p>Under GDPR, CCPA, and other privacy laws, you have comprehensive rights over your personal data:</p>
+                
+                <div class="rights-grid">
+                    <div class="right-item">
+                        <strong>Access</strong><br>
+                        Request copies of your personal data
+                    </div>
+                    <div class="right-item">
+                        <strong>Rectification</strong><br>
+                        Correct inaccurate information
+                    </div>
+                    <div class="right-item">
+                        <strong>Erasure</strong><br>
+                        Request deletion of your data
+                    </div>
+                    <div class="right-item">
+                        <strong>Portability</strong><br>
+                        Export your data in standard formats
+                    </div>
+                    <div class="right-item">
+                        <strong>Restriction</strong><br>
+                        Limit how we process your data
+                    </div>
+                    <div class="right-item">
+                        <strong>Objection</strong><br>
+                        Object to certain data processing
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-content">
+                <h3 class="subsection-title">Exercising Your Rights</h3>
+                <p>To exercise any of these rights, contact us using the information below. We will respond within 30 days and may request identity verification for security purposes.</p>
+
+                <p><strong>Note:</strong> Some rights may be limited by legal obligations (e.g., KYC requirements) or legitimate business interests (e.g., fraud prevention).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookies & Tracking -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Cookies & Tracking Technologies</h2>
+            <div class="section-content">
+                <p>We use cookies and similar technologies to enhance your experience and improve our platform:</p>
+
+                <h3 class="subsection-title">Types of Cookies</h3>
+                <ul class="data-list">
+                    <li><strong>Essential Cookies:</strong> Required for platform functionality and security</li>
+                    <li><strong>Performance Cookies:</strong> Help us understand how users interact with our platform</li>
+                    <li><strong>Functional Cookies:</strong> Remember your preferences and settings</li>
+                    <li><strong>Marketing Cookies:</strong> Deliver relevant content and track campaign effectiveness</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Cookie Control:</strong> You can manage cookie preferences in your browser settings or through our cookie consent manager. Note that disabling essential cookies may affect platform functionality.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Retention -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Data Retention</h2>
+            <div class="section-content">
+                <p>We retain your information only as long as necessary for the purposes outlined in this policy:</p>
+
+                <ul class="data-list">
+                    <li><strong>Account Information:</strong> Retained while your account is active and for 7 years after closure for compliance purposes</li>
+                    <li><strong>Transaction Records:</strong> Maintained for 10 years to meet financial and tax obligations</li>
+                    <li><strong>Communication Data:</strong> Kept for 3 years unless longer retention is required for legal purposes</li>
+                    <li><strong>Marketing Data:</strong> Deleted immediately upon unsubscribe or after 2 years of inactivity</li>
+                </ul>
+
+                <p>Blockchain records are permanent by design, but personal identifiers are pseudonymized to protect privacy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Children's Privacy -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Children's Privacy</h2>
+            <div class="section-content">
+                <p>Aurumeta.World is not intended for individuals under 18 years of age. We do not knowingly collect personal information from children under 18.</p>
+
+                <p>If we become aware that we have collected personal information from a child under 18, we will take steps to delete such information immediately. Parents or guardians who believe their child has provided us with personal information should contact us immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Transfers -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">International Data Transfers</h2>
+            <div class="section-content">
+                <p>As a global platform, we may transfer your personal data to countries outside your residence. We ensure adequate protection through:</p>
+
+                <ul class="data-list">
+                    <li><strong>Adequacy Decisions:</strong> Transfers to countries with adequate data protection laws</li>
+                    <li><strong>Standard Contractual Clauses:</strong> EU-approved contracts for data protection</li>
+                    <li><strong>Certification Schemes:</strong> Privacy Shield and similar frameworks where applicable</li>
+                    <li><strong>Binding Corporate Rules:</strong> Internal policies ensuring consistent protection</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>EU Users:</strong> We comply with GDPR requirements for international transfers and provide the same level of protection regardless of where your data is processed.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Updates -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Policy Updates</h2>
+            <div class="section-content">
+                <p>We may update this Privacy Policy periodically to reflect changes in our practices, technology, or legal requirements. When we make significant changes:</p>
+
+                <ul class="data-list">
+                    <li>We will notify you via email or platform notification</li>
+                    <li>We will post the updated policy on our website</li>
+                    <li>We will update the "Last Modified" date</li>
+                    <li>For material changes, we may require your explicit consent</li>
+                </ul>
+
+                <p>We encourage you to review this policy regularly to stay informed about how we protect your information.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-info">
+                <h4>Contact Our Privacy Team</h4>
+                <p>For questions about this Privacy Policy or to exercise your privacy rights:</p>
+                
+                <div class="contact-methods">
+                    <a href="mailto:privacy@aurumeta.world" class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        privacy@aurumeta.world
+                    </a>
+                    <a href="contact.html" class="contact-method">
+                        <i class="fas fa-comments"></i>
+                        Contact Form
+                    </a>
+                    <div class="contact-method" style="text-align: center;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            Data Protection Officer<br>
+                            Aurumeta.World<br>
+                            [Address to be determined]
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                    We typically respond to privacy inquiries within 2-3 business days.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Aurumeta.World. All rights reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+                Built with PopStoic philosophy - Where Wisdom Meets Innovation
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe content sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

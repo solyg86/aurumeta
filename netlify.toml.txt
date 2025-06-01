@@ -1,0 +1,277 @@
+# Aurumeta.World - Netlify Configuration
+# Built with PopStoic philosophy - Where Wisdom Meets Innovation
+
+[build]
+  # Build settings
+  publish = "."
+  command = "echo 'Static site - no build required'"
+
+[build.environment]
+  # Environment variables for build process
+  NODE_VERSION = "18"
+
+# Redirects for clean URLs and SEO
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/contact.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/contact.html"
+  status = 301
+  force = true
+
+# Handle SPA-style routing (if needed in future)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Form handling
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
+      font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://api.netlify.com https://www.google-analytics.com;
+      media-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    '''
+
+# Cache headers for better performance
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Contact form handling
+[[forms]]
+  name = "contact"
+
+# Function settings (for future serverless functions)
+[functions]
+  directory = "netlify/functions"
+
+# Dev settings
+[dev]
+  command = "python -m http.server 8888"
+  port = 8888
+  autoLaunch = true
+
+# Plugin configuration
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    buildDir = "."
+    exclude = [
+      '/admin/**',
+      '/wp-admin/**',
+      '/**/*.xml'
+    ]
+
+# Edge handlers (future PWA support)
+[[edge_handlers]]
+  handler = "pwa"
+  path = "/sw.js"
+
+# Environment-specific settings
+[context.production.environment]
+  HUGO_VERSION = "0.123.0"
+  HUGO_ENV = "production"
+  HUGO_ENABLEGITINFO = "true"
+
+[context.branch-deploy.environment]
+  HUGO_VERSION = "0.123.0"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.123.0"
+
+# Custom error pages
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/500"
+  to = "/500.html"
+  status = 500
+
+# API routes (for future backend integration)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Webhook endpoints
+[[redirects]]
+  from = "/webhooks/*"
+  to = "/.netlify/functions/webhooks"
+  status = 200
+
+# Social media verification files
+[[redirects]]
+  from = "/google*.html"
+  to = "/google-verification.html"
+  status = 200
+
+[[redirects]]
+  from = "/facebook*.html"
+  to = "/facebook-verification.html"
+  status = 200
+
+# Asset optimization
+[build.processing.images]
+  compress = true
+  quality = 85
+  format = "webp"
+
+# Branch-specific redirects
+[context.branch-deploy]
+  [context.branch-deploy.environment]
+    CONTEXT = "branch-deploy"
+
+[context.deploy-preview]
+  [context.deploy-preview.environment]
+    CONTEXT = "deploy-preview"
+
+# Performance optimizations
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Content-Type = "application/javascript"
+
+# Preload important resources
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = '''
+      </assets/css/style.css>; rel=preload; as=style,
+      </assets/js/script.js>; rel=preload; as=script,
+      <https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>; rel=preload; as=style; crossorigin
+    '''
+
+# CORS headers (if needed for API calls)
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://aurumeta.world"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+# Prevent hotlinking
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# Robots.txt handling
+[[redirects]]
+  from = "/robots.txt"
+  to = "https://aurumeta.world/robots.txt"
+  status = 200
+  headers = {Content-Type = "text/plain"}
+
+# Sitemap handling
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "https://aurumeta.world/sitemap.xml"
+  status = 200
+  headers = {Content-Type = "application/xml"}
+
+# RSS feed (future blog integration)
+[[redirects]]
+  from = "/feed.xml"
+  to = "/rss.xml"
+  status = 301
+
+# Analytics and tracking
+[[headers]]
+  for = "/assets/js/analytics.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Service Worker caching
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=86400"
+
+# Favicon caching
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+    Content-Type = "image/x-icon"
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404

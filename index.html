@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurumeta.World - Own the Future. Invest with Wisdom.</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #6B46C1;
+            --deep-purple: #4C1D95;
+            --gold: #F59E0B;
+            --vibrant-blue: #2563EB;
+            --magenta: #EC4899;
+            --dark-bg: #1F1B24;
+            --light-text: #F8FAFC;
+            --accent-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--deep-purple) 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(31, 27, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--primary-purple) 50%, var(--dark-bg) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, var(--gold) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, var(--magenta) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, var(--vibrant-blue) 0%, transparent 60%);
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--gold), var(--magenta), var(--vibrant-blue));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-visual {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+            background: linear-gradient(45deg, var(--gold), var(--primary-purple));
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-visual::before {
+            content: '🏛️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            opacity: 0.8;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+            margin: 0.5rem;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(75, 29, 149, 0.1);
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-block {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-items: center;
+        }
+
+        .solution-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2), rgba(236, 72, 153, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            width: 100%;
+            max-width: 320px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .solution-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(107, 70, 193, 0.2);
+        }
+
+        .solution-item i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .solution-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .solution-item p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .philosophy-quote {
+            background: linear-gradient(45deg, var(--primary-purple), var(--magenta));
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .philosophy-quote::before {
+            content: '"';
+            font-size: 6rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        .philosophy-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep-purple), var(--primary-purple));
+            padding: 5rem 0;
+        }
+
+        .cta-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .email-signup {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-bg);
+            font-size: 1rem;
+        }
+
+        .social-buttons {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-buttons h3 {
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .social-buttons p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .social-btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn i {
+            font-size: 1.3rem;
+        }
+
+        .discord:hover { 
+            border-color: #5865F2; 
+            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.3);
+        }
+        .twitter:hover { 
+            border-color: #1DA1F2; 
+            box-shadow: 0 8px 20px rgba(29, 161, 242, 0.3);
+        }
+        .telegram:hover { 
+            border-color: #0088cc; 
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-bg);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid rgba(107, 70, 193, 0.3);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .solution-item {
+                max-width: 100%;
+                min-height: auto;
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-options {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .philosophy-quote {
+                padding: 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .philosophy-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">Aurumeta.World</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="whitepaper.html">Whitepaper</a></li>
+                    <li><a href="roadmap.html">Roadmap</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Own the Future. Invest with Wisdom.</h1>
+                <p class="hero-subtitle">
+                    Discover Aurumeta.World: The platform that transforms bricks and mortar into liquid, accessible, and transparent digital assets. Build your wealth on solid foundations.
+                </p>
+                <div class="hero-visual"></div>
+                <a href="#cta" class="cta-primary">Join the Early Citizens of Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Traditional Investment Challenges</h2>
+            <div class="problem-blocks">
+                <div class="problem-block">
+                    <h3>Traditional Real Estate</h3>
+                    <p>High barriers to entry and low liquidity. Capital locked up for years.</p>
+                </div>
+                <div class="problem-block">
+                    <h3>Crypto World</h3>
+                    <p>Exciting but volatile and often complicated for the average investor.</p>
+                </div>
+                <div class="problem-block">
+                    <h3>The Missing Link</h3>
+                    <p>Where to find the stability of physical assets with the accessibility of the digital world?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Aurumeta.World - Your Solution</h2>
+            <div class="section-content">
+                <p>Real estate tokenization (RWA) in simple terms: We transform real buildings into digital shares that you can buy, sell, and manage online.</p>
+                
+                <div class="solution-grid">
+                    <div class="solution-item">
+                        <i class="fas fa-coins"></i>
+                        <h3>Accessibility</h3>
+                        <p>Invest from small amounts - you don't need millions to own part of valuable real estate</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-key"></i>
+                        <h3>True Ownership</h3>
+                        <p>Each token represents a real share in property - it's not just numbers</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Liquidity</h3>
+                        <p>Sell your shares when you want on the secondary market - no waiting for years</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-eye"></i>
+                        <h3>Transparency</h3>
+                        <p>Blockchain ensures full transparency of every transaction and decision</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-users"></i>
+                        <h3>DAO Governance</h3>
+                        <p>Have real impact on decisions through "Agora of Virtue" - our community</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Real Estate Experts</h3>
+                        <p>We work with experienced professionals who select the best investments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Why Aurumeta.World?</h2>
+            <div class="section-content">
+                <p>We're not just building a platform. We're building the foundation of investment's future based on the philosophy of <strong>PopStoicism</strong>.</p>
+                
+                <div class="philosophy-quote">
+                    The best revenge is not to be like your enemy.
+                    <br><small>- Marcus Aurelius, in the spirit of Web3</small>
+                </div>
+                
+                <p><strong>Stoicism</strong> teaches us long-term thinking, resilience, and rational decisions. <strong>Pop-Art</strong> makes the complex simple and accessible to everyone.</p>
+                
+                <p>At the heart of our community beats the <strong>"Agora of Virtue"</strong> - a place where every decision is made with care for the common good, transparency, and long-term value.</p>
+                
+                <p>We prioritize security, transparency, and building real value - not another speculative bubble.</p>
+                
+                <div class="philosophy-links">
+                    <a href="whitepaper.html" class="cta-primary">Read Full Whitepaper</a>
+                    <a href="roadmap.html" class="cta-primary">View Our Roadmap</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2 style="text-align: center;">Become Part of Aurumeta.World</h2>
+            
+            <div class="cta-options">
+                <div class="email-signup">
+                    <h3>Be First</h3>
+                    <p style="margin-bottom: 2.5rem;">Receive exclusive updates and get first access</p>
+                    <form class="email-form" onsubmit="handleEmailSubmit(event)">
+                        <input type="email" class="email-input" placeholder="Your email address" required>
+                        <button type="submit" class="cta-primary">Join the Community</button>
+                    </form>
+                    <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+                        Get the chance for early access, airdrops, and special PopStoic ranks
+                    </p>
+                </div>
+                
+                <div class="social-buttons">
+                    <h3>Find Us Online</h3>
+                    <p>Join the discussion and influence the platform's future</p>
+                    <div class="social-btn-container">
+                        <a href="#" class="social-btn discord">
+                            <i class="fab fa-discord"></i> <span>Join Discord</span>
+                        </a>
+                        <a href="#" class="social-btn twitter">
+                            <i class="fab fa-twitter"></i> <span>Follow on X/Twitter</span>
+                        </a>
+                        <a href="#" class="social-btn telegram">
+                            <i class="fab fa-telegram"></i> <span>Join Telegram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="whitepaper.html">Preliminary Whitepaper</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Aurumeta.World. All rights reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+                Built with PopStoic philosophy - Where Wisdom Meets Innovation
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling for CTA button
+        document.querySelector('.cta-primary').addEventListener('click', function(e) {
+            if (this.getAttribute('href') === '#cta') {
+                e.preventDefault();
+                document.getElementById('cta').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Email form submission
+        function handleEmailSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.email-input').value;
+            
+            if (email) {
+                alert('Thank you! You will receive more information about Aurumeta.World soon');
+                event.target.querySelector('.email-input').value = '';
+            }
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

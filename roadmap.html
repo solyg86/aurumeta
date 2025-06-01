@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Roadmap - Aurumeta.World</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #6B46C1;
+            --deep-purple: #4C1D95;
+            --gold: #F59E0B;
+            --vibrant-blue: #2563EB;
+            --magenta: #EC4899;
+            --dark-bg: #1F1B24;
+            --light-text: #F8FAFC;
+            --accent-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--deep-purple) 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(31, 27, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--primary-purple) 50%, var(--dark-bg) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), var(--magenta), var(--vibrant-blue));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .current-phase {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            padding: 0.7rem 2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(75, 29, 149, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--gold), var(--magenta), var(--vibrant-blue));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(107, 70, 193, 0.3);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-left-color: rgba(107, 70, 193, 0.3);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-right-color: rgba(107, 70, 193, 0.3);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border: 4px solid var(--dark-bg);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -2.5rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -2.5rem;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .phase-date {
+            color: var(--magenta);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .phase-description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .status-complete {
+            background: linear-gradient(45deg, #10B981, #34D399);
+        }
+
+        .status-current {
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            animation: pulse 2s infinite;
+        }
+
+        .status-upcoming {
+            background: linear-gradient(45deg, var(--vibrant-blue), var(--primary-purple));
+        }
+
+        .status-future {
+            background: linear-gradient(45deg, var(--primary-purple), var(--deep-purple));
+            opacity: 0.7;
+        }
+
+        /* Philosophy Quote */
+        .philosophy-quote {
+            background: linear-gradient(45deg, var(--primary-purple), var(--magenta));
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .philosophy-quote::before {
+            content: '"';
+            font-size: 6rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Solution Grid */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-items: center;
+        }
+
+        .solution-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2), rgba(236, 72, 153, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(107, 70, 193, 0.3);
+            width: 100%;
+            max-width: 320px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .solution-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(107, 70, 193, 0.2);
+        }
+
+        .solution-item i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .solution-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .solution-item p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Problem Blocks */
+        .problem-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-block {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .problem-block h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep-purple), var(--primary-purple));
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--magenta));
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+            margin: 0 1rem 1rem;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+        }
+
+        .footer {
+            background: var(--dark-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(107, 70, 193, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left;
+                padding: 1rem 1rem 1rem 3rem;
+            }
+            
+            .timeline-item .timeline-marker {
+                left: 10px !important;
+                right: auto !important;
+            }
+            
+            .timeline-content::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(31, 27, 36, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid rgba(107, 70, 193, 0.3);
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links a {
+                padding: 1rem;
+                border-radius: 8px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .solution-item {
+                max-width: 100%;
+                min-height: auto;
+                padding: 2rem 1.5rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                padding: 1rem 1rem 1rem 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">Aurumeta.World</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="whitepaper.html">Whitepaper</a></li>
+                    <li><a href="roadmap.html" class="active">Roadmap</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Development Roadmap</h1>
+            <p class="hero-subtitle">
+                Our journey to democratize real estate investment through PopStoic philosophy and blockchain innovation. From vision to global transformation.
+            </p>
+            <div class="current-phase">Currently in Pre-Launch Phase</div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="timeline">
+                <!-- Phase 0: Pre-Launch -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-current"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-current">Phase 0</div>
+                        <h3 class="phase-title">Foundation & Pre-Launch</h3>
+                        <div class="phase-date">Q1 2025 - Current</div>
+                        <p class="phase-description">
+                            Building the foundation of Aurumeta.World with PopStoic philosophy at its core. Establishing community, partnerships, and technical architecture.
+                        </p>
+                        <ul class="feature-list">
+                            <li>PopStoic philosophy development and branding</li>
+                            <li>Core team assembly and advisory board</li>
+                            <li>Legal framework and regulatory compliance</li>
+                            <li>MVP smart contract development</li>
+                            <li>Community building and early access program</li>
+                            <li>Strategic partnerships with real estate experts</li>
+                            <li>Initial funding and token economics design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 1: MVP Launch -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-upcoming"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-upcoming">Phase 1</div>
+                        <h3 class="phase-title">MVP Launch & First Properties</h3>
+                        <div class="phase-date">Q2 2025</div>
+                        <p class="phase-description">
+                            Launch of the minimum viable product with first tokenized properties. Establishing the Agora of Virtue DAO and initial community governance.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Platform MVP launch on Ethereum mainnet</li>
+                            <li>First 3-5 premium properties tokenized</li>
+                            <li>Agora of Virtue DAO implementation</li>
+                            <li>AURU token launch and distribution</li>
+                            <li>Basic marketplace functionality</li>
+                            <li>KYC/AML compliance system</li>
+                            <li>Mobile-responsive web application</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Platform Enhancement -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-upcoming"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-upcoming">Phase 2</div>
+                        <h3 class="phase-title">Platform Enhancement & Growth</h3>
+                        <div class="phase-date">Q3 2025</div>
+                        <p class="phase-description">
+                            Expanding functionality with advanced trading features, improved user experience, and portfolio diversification across multiple property types.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Advanced trading and portfolio management</li>
+                            <li>Automated revenue distribution system</li>
+                            <li>Property performance analytics dashboard</li>
+                            <li>Secondary market for token trading</li>
+                            <li>Multi-language support (EN, ES, DE, FR)</li>
+                            <li>Enhanced DAO governance features</li>
+                            <li>Portfolio of 15+ diverse properties</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Multi-Chain Expansion -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-upcoming"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-upcoming">Phase 3</div>
+                        <h3 class="phase-title">Multi-Chain & Mobile Launch</h3>
+                        <div class="phase-date">Q4 2025</div>
+                        <p class="phase-description">
+                            Expanding to multiple blockchains for better scalability and user experience. Launch of native mobile applications for iOS and Android.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Polygon integration for lower gas fees</li>
+                            <li>Cross-chain bridge implementation</li>
+                            <li>Native iOS and Android mobile apps</li>
+                            <li>DeFi integrations (lending, staking)</li>
+                            <li>Advanced property search and filters</li>
+                            <li>Social features and community interaction</li>
+                            <li>50+ properties across 10+ markets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 4: Global Expansion -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-future"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-future">Phase 4</div>
+                        <h3 class="phase-title">Global Market Expansion</h3>
+                        <div class="phase-date">Q1-Q2 2026</div>
+                        <p class="phase-description">
+                            International expansion with properties across North America, Europe, and Asia. Institutional partnerships and large-scale adoption.
+                        </p>
+                        <ul class="feature-list">
+                            <li>International market expansion (US, EU, Asia)</li>
+                            <li>Institutional investor onboarding</li>
+                            <li>Professional property management network</li>
+                            <li>Advanced risk assessment tools</li>
+                            <li>White-label platform for partners</li>
+                            <li>Integration with traditional real estate platforms</li>
+                            <li>100+ properties, $100M+ total value</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 5: Innovation & AI -->
+                <div class="timeline-item">
+                    <div class="timeline-marker status-future"></div>
+                    <div class="timeline-content">
+                        <div class="phase-badge status-future">Phase 5</div>
+                        <h3 class="phase-title">AI & Metaverse Integration</h3>
+                        <div class="phase-date">Q3-Q4 2026</div>
+                        <p class="phase-description">
+                            Cutting-edge innovation with AI-powered property analysis, metaverse real estate, and carbon-neutral investment options.
+                        </p>
+                        <ul class="feature-list">
+                            <li>AI-powered property valuation and recommendations</li>
+                            <li>Metaverse and virtual property tokenization</li>
+                            <li>Carbon-neutral and ESG-focused portfolios</li>
+                            <li>Predictive analytics for market trends</li>
+                            <li>Virtual property tours and AR experiences</li>
+                            <li>Automated property management systems</li>
+                            <li>500+ properties, global market leadership</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-content">
+                <h2 class="section-title">2030 Vision</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    By 2030, Aurumeta.World will be the global leader in democratized real estate investment, having transformed how people think about and access property ownership.
+                </p>
+
+                <div class="philosophy-quote">
+                    The best way to predict the future is to create it, guided by virtue and wisdom.
+                    <br><small>- Aurumeta.World Philosophy</small>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="1000000">1M+</span>
+                        <div class="metric-label">Global Investors</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="10000">10,000+</span>
+                        <div class="metric-label">Tokenized Properties</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="10">$10B+</span>
+                        <div class="metric-label">Assets Under Management</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="50">50+</span>
+                        <div class="metric-label">Countries Served</div>
+                    </div>
+                </div>
+
+                <p style="font-size: 1rem; opacity: 0.9; margin-top: 2rem;">
+                    Our PopStoic philosophy will have created a more equitable, transparent, and sustainable real estate market that serves both individual prosperity and collective good.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Key Milestones</h2>
+            <div class="section-content">
+                <div class="problem-blocks">
+                    <div class="problem-block">
+                        <h3><i class="fas fa-rocket" style="color: var(--gold); margin-right: 0.5rem;"></i>Q2 2025</h3>
+                        <p><strong>Platform Launch:</strong> First properties tokenized, DAO established, early community of 1,000+ members</p>
+                    </div>
+                    <div class="problem-block">
+                        <h3><i class="fas fa-chart-line" style="color: var(--gold); margin-right: 0.5rem;"></i>Q4 2025</h3>
+                        <p><strong>Growth Phase:</strong> $10M+ in tokenized assets, mobile app launch, 10,000+ active users</p>
+                    </div>
+                    <div class="problem-block">
+                        <h3><i class="fas fa-globe" style="color: var(--gold); margin-right: 0.5rem;"></i>Q2 2026</h3>
+                        <p><strong>Global Scale:</strong> International expansion, $100M+ AUM, institutional partnerships</p>
+                    </div>
+                    <div class="problem-block">
+                        <h3><i class="fas fa-brain" style="color: var(--gold); margin-right: 0.5rem;"></i>Q4 2026</h3>
+                        <p><strong>Innovation Lead:</strong> AI integration, metaverse properties, carbon-neutral portfolio</p>
+                    </div>
+                    <div class="problem-block">
+                        <h3><i class="fas fa-crown" style="color: var(--gold); margin-right: 0.5rem;"></i>2030</h3>
+                        <p><strong>Market Leader:</strong> 1M+ users, $10B+ AUM, transformed real estate investment globally</p>
+                    </div>
+                    <div class="problem-block">
+                        <h3><i class="fas fa-seedling" style="color: var(--gold); margin-right: 0.5rem;"></i>Beyond</h3>
+                        <p><strong>Legacy:</strong> PopStoic principles adopted industry-wide, sustainable investment standard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Evolution -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Technology Evolution</h2>
+            <div class="section-content">
+                <div class="solution-grid">
+                    <div class="solution-item">
+                        <i class="fas fa-link"></i>
+                        <h3>Blockchain Evolution</h3>
+                        <p>From single-chain to multi-chain architecture, ensuring optimal performance and lowest costs for users</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Integration</h3>
+                        <p>Machine learning for property valuation, risk assessment, and personalized investment recommendations</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile-First</h3>
+                        <p>Native mobile applications with AR property tours, push notifications, and seamless user experience</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-cube"></i>
+                        <h3>Metaverse Ready</h3>
+                        <p>Virtual property tokenization, VR experiences, and integration with major metaverse platforms</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Sustainability Focus</h3>
+                        <p>Carbon-neutral operations, green building investments, and environmental impact tracking</p>
+                    </div>
+                    <div class="solution-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security Evolution</h3>
+                        <p>Continuous security improvements, insurance partnerships, and industry-leading safety standards</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 1.5rem;">Join Our Journey</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                Be part of the real estate revolution from day one
+            </p>
+            <a href="index.html#cta" class="cta-primary">Join Early Access</a>
+            <a href="whitepaper.html" class="cta-primary">Read Whitepaper</a>
+            <a href="contact.html" class="cta-primary">Contact Team</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Aurumeta.World. All rights reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+                Built with PopStoic philosophy - Where Wisdom Meets Innovation
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Timeline scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
+            observer.observe(item);
+        });
+
+        // Metric counter animation
+        const counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.textContent.replace(/[^\d]/g, '')) || 0;
+                    
+                    if (target > 0) {
+                        const increment = Math.max(1, Math.floor(target / 100));
+                        let current = 0;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            
+                            const suffix = counter.textContent.match(/[^\d]+$/)?.[0] || '';
+                            counter.textContent = formatNumber(current) + suffix;
+                        }, 20);
+                    }
+                    
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-number').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toLocaleString();
+        }
+    </script>
+</body>
+</html>
